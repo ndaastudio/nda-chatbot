@@ -64,6 +64,7 @@ document.getElementById("inputChat").addEventListener("keyup", function(event) {
 
 document.getElementById("btnKirim").addEventListener("click", function(){
     let isiChat = document.getElementById("inputChat").value;
+    let adaIsiChat = false;
 
     if (isiChat !== '') {
         document.getElementById("bgChat").innerHTML += chatKeluar(isiChat);
@@ -71,6 +72,7 @@ document.getElementById("btnKirim").addEventListener("click", function(){
         document.getElementById("bgChat").scrollTop = parseInt(document.getElementById("bgChat").scrollHeight);
         for (i = 0; i < valueResponseBot.length; i++) {
             if (isiChat.toLowerCase().includes(keyChatUser[i].toLowerCase())) {
+                adaIsiChat = true;
                 const indexResponseBot = i;
                 document.getElementById("botMengetik").classList.remove("d-none");
                 setTimeout(() => {
@@ -80,6 +82,14 @@ document.getElementById("btnKirim").addEventListener("click", function(){
                 }, 2500);
             }
         }
-    }
 
+        if (!adaIsiChat) {
+            document.getElementById("botMengetik").classList.remove("d-none");
+            setTimeout(() => {
+                document.getElementById("bgChat").innerHTML += chatMasuk("Maaf, aku tidak mengerti. Sepertinya aku harus banyak belajar bahasa manusia :(");
+                document.getElementById("bgChat").scrollTop = parseInt(document.getElementById("bgChat").scrollHeight);
+                document.getElementById("botMengetik").classList.add("d-none");
+            }, 2500);
+        }
+    }
 });
