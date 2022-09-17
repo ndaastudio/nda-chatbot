@@ -30,7 +30,53 @@ function chatKeluar(txtKeluar) {
     </div>`
 }
 
-const keyChatUser = [
+function perkalian (txtHitung) {
+    let filterAngka = txtHitung.match(/(\d+)/g);
+    if (filterAngka !== null) {
+    let angkaPertama = filterAngka[0];
+    let angkaKedua = filterAngka[1];
+    return parseInt(angkaPertama) * parseInt(angkaKedua);
+    }
+}
+
+function pembagian (txtHitung) {
+    let filterAngka = txtHitung.match(/(\d+)/g);
+    if (filterAngka !== null) {
+    let angkaPertama = filterAngka[0];
+    let angkaKedua = filterAngka[1];
+    return parseInt(angkaPertama) / parseInt(angkaKedua);
+    }
+}
+
+function pertambahan (txtHitung) {
+    let filterAngka = txtHitung.match(/(\d+)/g);
+    if (filterAngka !== null) {
+    let angkaPertama = filterAngka[0];
+    let angkaKedua = filterAngka[1];
+    return parseInt(angkaPertama) + parseInt(angkaKedua);
+    }
+}
+
+function pengurangan (txtHitung) {
+    let filterAngka = txtHitung.match(/(\d+)/g);
+    if (filterAngka !== null) {
+    let angkaPertama = filterAngka[0];
+    let angkaKedua = filterAngka[1];
+    return parseInt(angkaPertama) - parseInt(angkaKedua);
+    }
+}
+
+document.getElementById("inputChat").addEventListener("keyup", function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById("btnKirim").click();
+    }
+});
+
+document.getElementById("btnKirim").addEventListener("click", function() {
+    let isiChat = document.getElementById("inputChat").value;
+    let adaIsiChat = false;
+
+    const keyChatUser = [
         'Halo',
         'Hai',
         'Kamu siapa',
@@ -40,10 +86,15 @@ const keyChatUser = [
         'Salah',
         'Lagi apa',
         'Keren',
-        'Sayang'
+        'Sayang',
+        'Bisa ngitung',
+        'Kali',
+        'Bagi',
+        'Tambah',
+        'Kurang'
     ];
 
-const valueResponseBot = [
+    const valueResponseBot = [
         'Halo juga!',
         'Iya, ada yang bisa bot bantu?',
         'Aku adalah bot yang diprogram oleh @ndaastudio. Aku disini siap menemani mu!',
@@ -53,18 +104,13 @@ const valueResponseBot = [
         'Hmm, maaf. Aku sebagai bot masih butuh banyak belajar dari manusia :(',
         'Lagi nemenin kamu ngobrol disini, hehehe :)',
         'Terimakasih :)',
-        'Iyaaa sayang kuu :)'
+        'Iyaaa sayang kuu :)',
+        'Bisa banget. Coba berikan aku perhitungan matematika seperti perkalian, mungkin?',
+        'Hasil nya adalah ' + perkalian(isiChat),
+        'Hasil nya adalah ' + pembagian(isiChat),
+        'Hasil nya adalah ' + pertambahan(isiChat),
+        'Hasil nya adalah ' + pengurangan(isiChat)
     ];
-
-document.getElementById("inputChat").addEventListener("keyup", function(event) {
-    if (event.key === 'Enter') {
-        document.getElementById("btnKirim").click();
-    }
-});
-
-document.getElementById("btnKirim").addEventListener("click", function(){
-    let isiChat = document.getElementById("inputChat").value;
-    let adaIsiChat = false;
 
     if (isiChat !== '') {
         document.getElementById("bgChat").innerHTML += chatKeluar(isiChat);
