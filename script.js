@@ -30,39 +30,21 @@ function chatKeluar(txtKeluar) {
     </div>`
 }
 
-function perkalian (txtHitung) {
+function perhitungan (txtHitung, opsiHitung) {
     let filterAngka = txtHitung.match(/(\d+)/g);
     if (filterAngka !== null) {
-    let angkaPertama = filterAngka[0];
-    let angkaKedua = filterAngka[1];
-    return parseInt(angkaPertama) * parseInt(angkaKedua);
-    }
-}
-
-function pembagian (txtHitung) {
-    let filterAngka = txtHitung.match(/(\d+)/g);
-    if (filterAngka !== null) {
-    let angkaPertama = filterAngka[0];
-    let angkaKedua = filterAngka[1];
-    return parseInt(angkaPertama) / parseInt(angkaKedua);
-    }
-}
-
-function pertambahan (txtHitung) {
-    let filterAngka = txtHitung.match(/(\d+)/g);
-    if (filterAngka !== null) {
-    let angkaPertama = filterAngka[0];
-    let angkaKedua = filterAngka[1];
-    return parseInt(angkaPertama) + parseInt(angkaKedua);
-    }
-}
-
-function pengurangan (txtHitung) {
-    let filterAngka = txtHitung.match(/(\d+)/g);
-    if (filterAngka !== null) {
-    let angkaPertama = filterAngka[0];
-    let angkaKedua = filterAngka[1];
-    return parseInt(angkaPertama) - parseInt(angkaKedua);
+        let angkaPertama = filterAngka[0];
+        let angkaKedua = filterAngka[1];
+        switch (opsiHitung) {
+            case 'tambah':
+                return parseInt(angkaPertama) + parseInt(angkaKedua);
+            case 'kurang':
+                return parseInt(angkaPertama) - parseInt(angkaKedua);
+            case 'kali':
+                return parseInt(angkaPertama) * parseInt(angkaKedua);
+            case 'bagi':
+                return parseInt(angkaPertama) / parseInt(angkaKedua);
+        }
     }
 }
 
@@ -106,10 +88,10 @@ document.getElementById("btnKirim").addEventListener("click", function() {
         'Terimakasih :)',
         'Iyaaa sayang kuu :)',
         'Bisa banget. Coba berikan aku perhitungan matematika seperti perkalian, mungkin?',
-        'Hasil nya adalah ' + perkalian(isiChat),
-        'Hasil nya adalah ' + pembagian(isiChat),
-        'Hasil nya adalah ' + pertambahan(isiChat),
-        'Hasil nya adalah ' + pengurangan(isiChat)
+        'Hasil nya adalah ' + perhitungan(isiChat, 'kali'),
+        'Hasil nya adalah ' + perhitungan(isiChat, 'bagi'),
+        'Hasil nya adalah ' + perhitungan(isiChat, 'tambah'),
+        'Hasil nya adalah ' + perhitungan(isiChat, 'kurang')
     ];
 
     if (isiChat !== '') {
